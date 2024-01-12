@@ -3,9 +3,11 @@ import {IoMdClose} from 'react-icons/io'
 import ItemCart from '../Components/ItemCart'
 import {useSelector} from "react-redux"
 import { FaShoppingCart } from "react-icons/fa";
+import {useNavigate} from "react-router-dom";
+import Success from '../Pages/Success';
 
 const Cart = () => {
-   const [activeCart , setActiveCart] =useState(true);
+   const [activeCart , setActiveCart] =useState(false);
 
    const cartItems =useSelector((state)=> state.cart.cart);
    // console.log(cartItems);
@@ -13,6 +15,9 @@ const Cart = () => {
     // 0 -- is the inital value 
 
    const totalPrice = cartItems.reduce((total ,item) => total +item.qty * item.price ,0);
+      
+       const navigate = useNavigate();
+
 
     return (
         <>
@@ -53,7 +58,7 @@ const Cart = () => {
             <h3 className='font-semibold text-gray-800'>Items : {totalQty} </h3>
             <h3 className='font-semibold text-gray-800'>Total Amount : {totalPrice}</h3>
             <hr className='w-[90vw] lg:w-[18vw] my-2' />
-           <button className=' bg-green-500 font-bold px-3 text-white py-2 rounded-lg w-[90vw]  lg:w-[18vw] mb-5'>Checkout</button>
+           <button onClick={()=> navigate('/Success')} className=' bg-green-500 font-bold px-3 text-white py-2 rounded-lg w-[90vw]  lg:w-[18vw] mb-5'>Checkout</button>
         </div>
         </div>
         <FaShoppingCart 

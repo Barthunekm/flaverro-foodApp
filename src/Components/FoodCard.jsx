@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/slices/CartSlice';
 
 const FoodCard = (props) => {
-  const { id, name, price, desc, img, rating, category } = props;
+  const { id, name, price, desc, img, rating, handleToast } = props;
      
          const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ const FoodCard = (props) => {
           />
           <div className="text-sm flex justify-between">
             <h2>{name}</h2>
-            <span className="text-green-500 ">{price}</span>
+            <span className="text-green-500 ">₹{price}</span>
           </div>
           <p className="text-sm font-normal">{desc.slice(0 , 50)}...</p>
           <div className="flex justify-between ">
@@ -25,7 +25,11 @@ const FoodCard = (props) => {
               <AiFillStar className="mr-1 text-yellow-400" />{rating}
             </span>
             <button onClick={()=>{
-               dispatch(addToCart({id,name,price,rating,qty:1,img }));
+               dispatch(
+                addToCart({id,name,price,rating,qty:1,img })
+                );
+                handleToast(name);
+
             }}
              className="p-1 text-white bg-green-500 hover:bg-green-600 rounded-lg text-sm">
               Add to cart
